@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string getString(char x){
+        string s(1, x);
+        return s;  
+    }
+
+    int charPositionInSubstring(string newChar, string substring){
+        for(int i=0; i<substring.length(); i++){
+            if (newChar == getString(substring[i])) return i;
+        }
+        return -1;
+    }
+
+    string newSubstring(string substring, string newChar){
+        int newCharPosInSubstring = charPositionInSubstring(newChar, substring);
+        if(newCharPosInSubstring > -1){
+            substring.erase(0,newCharPosInSubstring+1);
+        } 
+        substring.append(newChar);
+        return substring;
+    }
+    int lengthOfLongestSubstring(string s) {
+        if(s.length()==0) return 0;
+        int maxLen = 1;
+        string substring = getString(s[0]);
+        for(int i=1; i<s.length(); i++){
+            substring = newSubstring(substring, getString(s[i]));
+            if(substring.length()>maxLen) maxLen = substring.length();
+        }
+        return maxLen;
+    }
+};
