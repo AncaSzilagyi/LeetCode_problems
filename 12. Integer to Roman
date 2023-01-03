@@ -1,0 +1,88 @@
+class Solution {
+public:
+
+    string romanUnits(int units){
+        string romanUnits = "";
+        if(units<4){
+            while (units>0) {
+                romanUnits.append("I");
+                units--;
+            }
+        } 
+        else if(units == 4) romanUnits.append("IV");
+        // else if(units==5) romanUnits.append("V");
+        else if (units < 9) {
+            romanUnits.append("V");
+            int x = units-5;
+            while(x>0){
+                romanUnits.append("I");
+                x--;
+            }
+        }
+        else if(units == 9) romanUnits.append("IX"); 
+        return romanUnits;
+    }
+
+    string romanTens(int tens){
+        string romanTens = "";
+        if(tens<4){
+            while (tens>0) {
+                romanTens.append("X");
+                tens--;
+            }
+        } 
+        else if(tens == 4) romanTens.append("XL");
+        else if (tens < 9) {
+            romanTens.append("L");
+            int x = tens-5;
+            while(x>0){
+                romanTens.append("X");
+                x--;
+            }
+        }
+        else if(tens == 9) romanTens.append("IX"); 
+        return romanTens;
+    }
+
+    string romanHundreds(int hundreds){
+        string romanHundreds = "";
+        if(hundreds<4){
+            while (hundreds>0) {
+                romanHundreds.append("C");
+                hundreds--;
+            }
+        } 
+        else if(hundreds == 4) romanHundreds.append("CD");
+        else if (hundreds < 9) {
+            romanHundreds.append("D");
+            int x = hundreds-5;
+            while(x>0){
+                romanHundreds.append("C");
+                x--;
+            }
+        }
+        else if(hundreds == 9) romanHundreds.append("CM"); 
+        return romanHundreds;
+    }
+
+    string romanThousands(int thousands){
+        string romanThousands = "";
+        while(thousands>0) romanThousands.append("M");
+        return romanThousands;
+
+    }
+
+    string intToRoman(int num) {
+        string units = romanUnits(num%10);
+        string tens = romanTens(num%100/10);
+        string hundreds = romanHundreds(num%1000/100);
+        string thousands = romanThousands(num%10000/1000);
+        string finalNumber = "";
+        finalNumber.append(thousands);
+        finalNumber.append(hundreds);
+        finalNumber.append(tens);
+        finalNumber.append(units);
+    return finalNumber;
+
+    }
+};
