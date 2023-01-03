@@ -1,0 +1,58 @@
+class Solution {
+public:
+
+    string getString(char x){
+        string s(1, x);
+        return s;  
+    }
+
+    int isPalindrome(string substring){
+        int substringLength = substring.length();
+        for(int i=0; i<substringLength/2; i++)
+            if(substring[i]!=substring[substringLength-i-1]) return 0;
+        return 1;
+    }
+
+    string expandPalindrome(int i, int j, string s){
+        if(i==0) return getString(s[i]);
+        else{
+            int pre = i-1;
+            int post = j+1;
+            while(pre>=0 && post<=s.length()){
+                if(isPalindrome(s.substr(pre, post-pre))){
+                    pre--;
+                    post++;
+                }
+                // else return s.substr(pre+1, post-pre-2);
+                else {
+                    pre++;
+                    post--;
+                };
+            }
+        return s.substr(pre, post-pre);
+        }
+        
+    }
+
+    string longestPalindrome(string s){
+        if(s.length()==0) return s;
+        int maxLen = 1;
+        string longestPalindrome = getString(s[0]);
+        string newPalindrome = "";
+        for(int i=1; i<s.length()-1; i++){
+            if(s[i-1]==s[i])
+                newPalindrome = expandPalindrome(i-1, i, s);
+            else if(s[i]==s[i+1])
+                newPalindrome = expandPalindrome(i, i+1, s);
+            else newPalindrome = expandPalindrome(i, i, s);
+            
+            if(newPalindrome.length()>maxLen){
+                maxLen = newPalindrome.length();
+                longestPalindrome = newPalindrome;
+            }
+        }
+        return longestPalindrome;
+
+    }
+
+};
