@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int checkSumTarget(int a, int b, int target){
+        if(a+b == target) return 1;
+        return 0;
+    }
+
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> response;
+        for(int i=0; i<nums.size(); i++)
+            for(int j=i+1; j<nums.size(); j++)
+                if(checkSumTarget(nums[i], nums[j], target)==1){
+                    response.push_back(i);
+                    response.push_back(j);
+                    return response;
+                }
+        return response;
+    }    
+};
