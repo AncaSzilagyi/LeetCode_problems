@@ -16,6 +16,7 @@ Given a string s, find the length of the longest substring without repeating cha
 # 5. [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/description/)
 
 Given a string s, return the longest palindromic substring in s.
+- this was noted as a solution that exceeds the time. I have considered shorter cases for string s. My solution seems with Leetcode official solution.
 
 
 
