@@ -1,0 +1,45 @@
+#include <math.h>
+#include <stdio.h>
+
+class Solution {
+public:
+
+    int reversedNumber(int x){
+        int reversed = 0;
+        if(x<10) return x;
+        while(x>0){
+            reversed = reversed*10 + x%10;
+            x/=10;
+        }
+        return reversed;
+    }
+
+    int numOfDigits(int x){
+        if(x<10) return 1;
+        return 1 + numOfDigits(x/10);
+    }
+
+    bool isPalindrome(int x) {
+        if(x<0 || x%10==0 && x!=0) return false;
+        if(x<10) return true;
+
+        int noDigits = numOfDigits(x);
+        int left =0;
+
+        if(noDigits%2==0)
+            left = x / (pow(10,(noDigits/2)));
+        else 
+            left = x / (pow(10,(noDigits/2+1)));
+
+        int right = x % (int)(pow(10,(noDigits/2)));
+
+        while (numOfDigits(left)!=numOfDigits(right)){
+            left = left/10;
+        }
+        int reversedRight = reversedNumber(right);
+
+        if((int)left == reversedRight) return true;
+        return false;
+        
+    }
+};
